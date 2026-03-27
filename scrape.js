@@ -54,7 +54,7 @@ async function scrapeReviews(page) {
     // ol.stars is 4 levels deep inside the review card
     document.querySelectorAll('ol.stars').forEach((ol) => {
       const card = ol.parentElement?.parentElement?.parentElement?.parentElement;
-      if (!card) return;
+      if (!card || card.classList.contains('is-detail-view')) return;
 
       const ratingMatch = ol.getAttribute('aria-label')?.match(/(\d+)/);
       const rating = ratingMatch ? parseInt(ratingMatch[1]) : null;
